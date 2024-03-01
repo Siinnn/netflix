@@ -1,0 +1,98 @@
+<%- include ('base') %>
+<header>
+    <a id="acteurs">Liste des acteurs</a>
+    <a id="reals">Liste des reals</a>
+    <a id="genres">Liste des genres</a>
+
+
+</header>
+
+    <form action="send" method="post" style="display: block;">
+        <select name="choix" id="choix">
+            <option value="">--Choisissez ce que vous voulez ajouter--</option>
+
+            <option value="acteur">Acteur</option>
+            <option value="real">Real</option>
+            <option value="genre">Genre</option>
+            <option value="film">Film</option>
+        </select>
+        <div id="act" hidden>
+            <input type="text" name="nom" placeholder="nom">
+            <input type="text" name="prenom" placeholder="prenom">
+            <input type="text" name="photo" placeholder="photo">
+
+            <input type="submit" value="go">
+        </div>
+        <div id="gen" hidden>
+            <input type="text" name="nomg" placeholder="nom">
+            <input type="submit" value="go">
+        </div>
+        <div id="film" hidden>
+            <input type="text" name="titre" placeholder="titre">
+            <input type="date" name="date" placeholder="date_de_sortie">
+            <input type="text" name="affiche" placeholder="affiche">
+            <select name="genre">
+                <% for (g of genres){ %>
+                        <option value="<%=g.id_genre%>">
+                                <%=g.nom%>
+                        </option>
+                <% } %>
+        </select>
+        <select name="real">
+            <% for (g of reals){ %>
+                    <option value="<%=g.id_real%>">
+                            <%=g.nomr%> <%=g.prenom%> 
+                    </option>
+            <% } %>
+    </select>
+
+            <input type="submit" value="go">
+        </div>
+
+    </form>
+
+    <script>
+
+        var choix = document.getElementById("choix")
+
+        choix.addEventListener("change", (e) => {
+
+            if (choix.value == "acteur" || choix.value == "real") {
+                document.getElementById("act").hidden = false;
+                document.getElementById("gen").hidden = true;
+                document.getElementById("film").hidden = true;
+
+
+            }
+            else if(choix.value == "genre") {
+                document.getElementById("gen").hidden = false;
+                document.getElementById("act").hidden = true;
+                document.getElementById("film").hidden = true;
+
+
+            }
+            else if(choix.value == "film") {
+                document.getElementById("film").hidden = false;
+                document.getElementById("act").hidden = true;
+                document.getElementById("gen").hidden = true;
+
+
+            }
+        }
+        
+
+        
+        )
+        document.getElementById("acteurs").addEventListener("click",(e)=>{
+      window.location.replace("http://localhost:5000/acteurs")
+    })
+    document.getElementById("reals").addEventListener("click",(e)=>{
+      window.location.replace("http://localhost:5000/reals")
+    })
+
+    document.getElementById("genres").addEventListener("click",(e)=>{
+      window.location.replace("http://localhost:5000/genres")
+    })
+
+
+    </script>

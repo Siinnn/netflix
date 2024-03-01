@@ -1,0 +1,46 @@
+<%- include ('base') %>
+<header>
+  <a href="accueil">Accueil</a>
+
+  <br><br>
+    <a id="films">Liste des films</a>
+    <a id="acteurs">Liste des acteurs</a>
+    <a id="reals">Liste des reals</a>
+    <a id="genres">Liste des genres</a><br><br>
+ <a href="addpersonne">Ajoute</a>
+
+</header>
+<% for( a of data) { %>
+    <section>
+  <!-- for (let b in a){
+      } -->
+    <h2> <a href="<%= cat %>/<%= a.id_acteur || a.id_real || a.id_genre|| a.id_film%>"><%= a.nom || a.nomr || a.titre%>
+   
+     <%= a.prenom %></a></h2>
+     <% if ( a.affiche ){ %>
+     <h2> Sortie:<br><%= moment(a.date_de_sortie).format('DD/MM/YYYY') %> </h2>
+     <% }%>
+     <% if (a.photo || a.affiche ){ %>
+      <a href="<%= cat %>/<%=a.id_film || a.id_acteur || a.id_real || a.id_genre %>"><img src="<%= a.photo || a.affiche %>"></a>
+
+    <%} %>
+
+    </section>
+    <% }%>
+
+    <script>
+        document.getElementById("acteurs").addEventListener("click",(e)=>{
+          window.location.replace("http://localhost:5000/acteurs")
+        })
+        document.getElementById("reals").addEventListener("click",(e)=>{
+          window.location.replace("http://localhost:5000/reals")
+        })
+
+        document.getElementById("genres").addEventListener("click",(e)=>{
+          window.location.replace("http://localhost:5000/genres")
+        })
+
+        document.getElementById("films").addEventListener("click",(e)=>{
+          window.location.replace("http://localhost:5000/films")
+        })
+    </script>

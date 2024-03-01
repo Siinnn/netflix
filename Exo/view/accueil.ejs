@@ -1,0 +1,77 @@
+<%- include ('base') %>
+
+<style>
+    #inscription,#connexion {
+        display: none;
+    }
+</style>
+<header>
+    <a id="inscr">inscription</a>
+    <a  id="connect">connexion</a>
+
+
+    <br><br>
+    <a id="films">Liste des films</a>
+    <a id="acteurs">Liste des acteurs</a>
+    <a id="reals">Liste des reals</a>
+    <a id="genres">Liste des genres</a><br><br>
+   <a href="addpersonne">Ajoute</a>
+</header>
+
+
+<section id="inscription">  
+  <form action="inscription" method="POST">
+    <input type="text" name="nom"  placeholder="nom">
+    <input type="text" name="prenom" placeholder="prenom">
+    <input type="text" name="email"  placeholder="email">
+    <input type="text" name="mdp"  placeholder="mot de passe">
+            <select name="role">
+                <option value="admin">ADMIN</option>
+                <option value="client">CLIENT</option>
+
+    <input type="submit" value="Inscription">
+</form>
+
+</section>
+<br>
+
+<section id="connexion">
+  <form action="connexion" method="POST">
+    <input type="text" name="email" placeholder="email" required>
+       <input type="text" name="mdp" placeholder="mot de passe" required>
+       <input type="submit" value="se connecter">
+</form>
+</section>
+
+
+
+
+<script>
+    document.getElementById("acteurs").addEventListener("click",(e)=>{
+      window.location.replace("http://localhost:5000/acteurs")
+    })
+    document.getElementById("reals").addEventListener("click",(e)=>{
+      window.location.replace("http://localhost:5000/reals")
+    })
+
+    document.getElementById("genres").addEventListener("click",(e)=>{
+      window.location.replace("http://localhost:5000/genres")
+    })
+
+    document.getElementById("films").addEventListener("click",(e)=>{
+      window.location.replace("http://localhost:5000/films")
+    })
+
+    document.getElementById("inscr").addEventListener("click", (e)=>{
+      document.getElementById("inscription").style.display = "inline-block";
+    })
+    document.getElementById("inscr").addEventListener("dblclick", (e)=>{
+      document.getElementById("inscription").style.display = "none";
+    })
+    document.getElementById("connect").addEventListener("click", (e)=>{
+      document.getElementById("connexion").style.display = "inline-block";
+    })
+    document.getElementById("connect").addEventListener("dblclick", (e)=>{
+      document.getElementById("connexion").style.display = "none";
+    })
+</script>

@@ -1,0 +1,75 @@
+<%- include ('base') %>
+
+<header>
+    <a id="films">Liste des films</a>
+    <a id="acteurs">Liste des acteurs</a>
+    <a id="reals">Liste des reals</a>
+    <a id="genres">Liste des genres</a>
+
+
+</header>
+
+<section>
+
+    <h1> <%= data.nom || data.nomr || data.titre %>
+    <%= data.prenom %></h1>
+    <% if ( data.affiche ){ %>
+        <h2> Sortie:<br><%= moment(data.date_de_sortie).format('DD/MM/YYYY') %>   </h2>
+
+        <% }%>
+    <% if (data.photo|| data.affiche){ %>
+        <img src="<%= data.photo || data.affiche %>">
+        <%} %>
+    </section>
+<form action="../modif" method="post">
+    <% if (data.nom || data.nomr){ %>
+    <input type="text" name="nom" value="<%= data.nom || data.nomr %>">
+        
+    <%} if (data.photo){ %>
+    <input type="text" name="prenom" value="<%= data.prenom %>">
+    <input type="text" name="photo" value="<%= data.photo %>">
+        <%}%>
+        <% if (cat == "film"){ %>
+            <input type="text" name="titre" value="<%= data.titre %>">
+            <input type="date" name="date" value="<%=  moment(data.date_de_sortie).format('YYYY-MM-DD') %>">
+            <input type="text" name="affiche" value="<%= data.affiche %>" placeholder="photo">
+            <select name="genre">
+                <% for (g of genres) { %>
+                        <option value= " <%=g.id_genre%>" <% if (g.id_genre == data.id_genre){ %>
+                                  selected
+                                <% } %>>
+                                <%=g.nom%>
+                        </option>
+                <% } %>
+        </select>
+
+        <select name="real">
+            <% for (g of reals) { %>
+                    <option value= " <%=g.id_real%>" <% if (g.id_real == data.id_real){ %>
+                              selected
+                            <% } %>>
+                            <%=g.nomr%> <%=g.prenom%>
+                    </option>
+            <% } %>
+    </select>
+            <% } %>
+     <input type="hidden" name="choix" value="<%= cat %>">
+     <input type="hidden" name="id" value="<%= data.id_film ||data.id_acteur || data.id_real || data.id_genre %>">
+
+    <input type="submit" value="Modifier">
+   
+</form>
+
+<script>
+   
+    document.getElementById("acteurs").addEventListener("click",(e)=>{
+      window.location.replace("http://localhost:5000/acteurs")
+    })
+    document.getElementById("reals").addEventListener("click",(e)=>{
+      window.location.replace("http://localhost:5000/reals")
+    })
+
+    document.getElementById("genres").addEventListener("click",(e)=>{
+      window.location.replace("http://localhost:5000/genres")
+    })
+</script>
